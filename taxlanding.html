@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ethiopian Tax Verification System</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#8B4513", secondary: "#D2B48C" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Montserrat', sans-serif;
+      }
+      .ethiopian-pattern {
+      background-image: linear-gradient(45deg, rgba(139, 69, 19, 0.1) 25%, transparent 25%, transparent 50%, rgba(139, 69, 19, 0.1) 50%, rgba(139, 69, 19, 0.1) 75%, transparent 75%, transparent);
+      background-size: 20px 20px;
+      }
+      .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(139, 69, 19, 0.1), 0 10px 10px -5px rgba(139, 69, 19, 0.04);
+      }
+      .board-card:hover .board-overlay {
+      opacity: 1;
+      }
+      .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      }
+      .accordion-content.active {
+      max-height: 500px;
+      }
+      input:focus, textarea:focus {
+      outline: none;
+      border-color: #8B4513;
+      }
+      .custom-checkbox {
+      position: relative;
+      padding-left: 30px;
+      cursor: pointer;
+      user-select: none;
+      }
+      .custom-checkbox input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      }
+      .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      background-color: #fff;
+      border: 2px solid #8B4513;
+      border-radius: 4px;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+      background-color: #8B4513;
+      }
+      .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+      display: block;
+      }
+      .custom-checkbox .checkmark:after {
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+      .language-toggle {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+      }
+      .language-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      }
+      .language-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #D2B48C;
+      transition: .4s;
+      border-radius: 30px;
+      }
+      .language-slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      }
+      input:checked + .language-slider {
+      background-color: #8B4513;
+      }
+      input:checked + .language-slider:before {
+      transform: translateX(30px);
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <div class="flex items-center">
+          <h1 class="text-3xl font-['Pacifico'] text-primary">logo</h1>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+          <a
+            href="#home"
+            class="text-gray-800 hover:text-primary font-medium transition-colors scroll-smooth"
+            >Home</a
+          >
+          <a
+            href="#services"
+            class="text-gray-800 hover:text-primary font-medium transition-colors scroll-smooth"
+            >Services</a
+          >
+          <a
+            href="#board"
+            class="text-gray-800 hover:text-primary font-medium transition-colors scroll-smooth"
+            >Board</a
+          >
+          <a
+            href="#contact"
+            class="text-gray-800 hover:text-primary font-medium transition-colors scroll-smooth"
+            >Contact</a
+          >
+          <a
+            href="#faq"
+            class="text-gray-800 hover:text-primary font-medium transition-colors scroll-smooth"
+            >FAQ</a
+          >
+        </nav>
+
+      </div>
+      <div
+        class="md:hidden hidden bg-white shadow-lg absolute w-full"
+        id="mobile-menu"
+      >
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+          <a
+            href="#home"
+            class="text-gray-800 hover:text-primary font-medium py-2 transition-colors scroll-smooth"
+            >Home</a
+          >
+          <a
+            href="#services"
+            class="text-gray-800 hover:text-primary font-medium py-2 transition-colors scroll-smooth"
+            >Services</a
+          >
+          <a
+            href="#board"
+            class="text-gray-800 hover:text-primary font-medium py-2 transition-colors scroll-smooth"
+            >Board</a
+          >
+          <a
+            href="#contact"
+            class="text-gray-800 hover:text-primary font-medium py-2 transition-colors scroll-smooth"
+            >Contact</a
+          >
+          <a
+            href="#faq"
+            class="text-gray-800 hover:text-primary font-medium py-2 transition-colors scroll-smooth"
+            >FAQ</a
+          >
+        </div>
+      </div>
+    </header>
+    <section
+      id="home"
+      class="relative w-full"
+      style="background-image: url('https://readdy.ai/api/search-image?query=Ethiopian%20landscape%20with%20traditional%20patterns%20and%20designs%2C%20soft%20lighting%2C%20warm%20colors%2C%20professional%20business%20setting%20with%20subtle%20African%20motifs%2C%20gradient%20from%20light%20to%20darker%20tones%20on%20right%20side%2C%20perfect%20for%20text%20overlay%20on%20left%20side%2C%20high%20quality%20professional%20photograph&width=1920&height=800&seq=1&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"
+      ></div>
+      <div class="container mx-auto px-4 py-20 md:py-32 relative">
+        <div class="w-full md:w-1/2">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Ethiopian Tax Verification System
+          </h1>
+          <p class="text-lg text-gray-700 mb-8">
+            Streamline your tax compliance with our innovative verification
+            system designed specifically for Ethiopian businesses and
+            individuals. Experience the blend of traditional values with modern
+            technology.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+          >
+            <button
+              class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap"
+            >
+              Get Started
+            </button>
+            <button
+              class="border-2 border-primary text-primary px-8 py-3 !rounded-button font-medium hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+            >
+              Learn More
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="services" class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 relative inline-block"
+          >
+            Our Services
+            <div
+              class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"
+            ></div>
+          </h2>
+          <p class="text-lg text-gray-700 mt-6 max-w-2xl mx-auto">
+            Discover our comprehensive range of tax verification services
+            designed to meet the unique needs of Ethiopian businesses and
+            individuals.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="service-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100"
+          >
+            <div
+              class="h-24 ethiopian-pattern flex items-center justify-center"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md"
+              >
+                <i class="ri-file-search-line text-primary ri-2x"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Tax Document Verification
+              </h3>
+              <p class="text-gray-700 mb-4">
+                Verify the authenticity of tax documents and certificates issued
+                by Ethiopian tax authorities with our secure verification
+                system.
+              </p>
+              <a
+                href="#"
+                class="inline-flex items-center text-primary font-medium hover:underline"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100"
+          >
+            <div
+              class="h-24 ethiopian-pattern flex items-center justify-center"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md"
+              >
+                <i class="ri-calculator-line text-primary ri-2x"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Tax Liability Assessment
+              </h3>
+              <p class="text-gray-700 mb-4">
+                Calculate and assess your tax liabilities according to Ethiopian
+                tax laws with our advanced assessment tools and expert guidance.
+              </p>
+              <a
+                href="#"
+                class="inline-flex items-center text-primary font-medium hover:underline"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100"
+          >
+            <div
+              class="h-24 ethiopian-pattern flex items-center justify-center"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md"
+              >
+                <i class="ri-shield-check-line text-primary ri-2x"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Compliance Monitoring
+              </h3>
+              <p class="text-gray-700 mb-4">
+                Stay compliant with Ethiopian tax regulations through our
+                real-time monitoring system that alerts you to upcoming
+                deadlines and changes.
+              </p>
+              <a
+                href="#"
+                class="inline-flex items-center text-primary font-medium hover:underline"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100"
+          >
+            <div
+              class="h-24 ethiopian-pattern flex items-center justify-center"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md"
+              >
+                <i class="ri-government-line text-primary ri-2x"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Government Liaison Services
+              </h3>
+              <p class="text-gray-700 mb-4">
+                We act as your intermediary with Ethiopian tax authorities,
+                handling communications and resolving issues on your behalf.
+              </p>
+              <a
+                href="#"
+                class="inline-flex items-center text-primary font-medium hover:underline"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100"
+          >
+            <div
+              class="h-24 ethiopian-pattern flex items-center justify-center"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md"
+              >
+                <i class="ri-book-open-line text-primary ri-2x"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Tax Education & Training
+              </h3>
+              <p class="text-gray-700 mb-4">
+                Enhance your understanding of Ethiopian tax systems through our
+                comprehensive training programs and educational resources.
+              </p>
+              <a
+                href="#"
+                class="inline-flex items-center text-primary font-medium hover:underline"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100"
+          >
+            <div
+              class="h-24 ethiopian-pattern flex items-center justify-center"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md"
+              >
+                <i class="ri-line-chart-line text-primary ri-2x"></i>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                Business Tax Planning
+              </h3>
+              <p class="text-gray-700 mb-4">
+                Optimize your tax strategy with our planning services tailored
+                to Ethiopian businesses, helping you maximize savings while
+                ensuring compliance.
+              </p>
+              <a
+                href="#"
+                class="inline-flex items-center text-primary font-medium hover:underline"
+              >
+                Learn More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="board" class="py-16 md:py-24">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 relative inline-block"
+          >
+            Our Board Members
+            <div
+              class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"
+            ></div>
+          </h2>
+          <p class="text-lg text-gray-700 mt-6 max-w-2xl mx-auto">
+            Meet our experienced board of directors who guide our organization
+            with their expertise in Ethiopian taxation and business practices.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="board-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 relative"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="images/download (1).jpg"
+                alt="Dr. Abebe Bekele"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Dr. Abebe Bekele
+              </h3>
+              <p class="text-primary font-medium mb-3">Chairperson</p>
+              <p class="text-gray-700 mb-4">
+                Former Director of Ethiopian Revenue and Customs Authority with
+                over 25 years of experience in tax administration and policy
+                development.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-linkedin-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-twitter-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-mail-fill"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="board-overlay absolute inset-0 bg-primary bg-opacity-90 p-6 flex flex-col justify-center opacity-0 transition-opacity duration-300"
+            >
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Dr. Abebe Bekele
+              </h3>
+              <p class="text-white font-medium mb-4">Chairperson</p>
+              <p class="text-white mb-4">
+                Dr. Bekele holds a PhD in Economic Policy from Addis Ababa
+                University and has served as an advisor to the Ministry of
+                Finance. His expertise includes tax reform, revenue
+                optimization, and international tax agreements.
+              </p>
+              <div class="flex flex-wrap">
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Tax Policy</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Public Finance</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Economic Development</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="board-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 relative"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="images/download.jpg"
+                alt="Ms. Tigist Haile"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Ms. Tigist Haile
+              </h3>
+              <p class="text-primary font-medium mb-3">Vice Chairperson</p>
+              <p class="text-gray-700 mb-4">
+                Seasoned financial expert with extensive experience in Ethiopian
+                banking sector and tax compliance systems for major
+                corporations.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-linkedin-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-twitter-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-mail-fill"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="board-overlay absolute inset-0 bg-primary bg-opacity-90 p-6 flex flex-col justify-center opacity-0 transition-opacity duration-300"
+            >
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Ms. Tigist Haile
+              </h3>
+              <p class="text-white font-medium mb-4">Vice Chairperson</p>
+              <p class="text-white mb-4">
+                Ms. Haile is a Certified Public Accountant with an MBA from
+                Harvard Business School. She previously served as CFO of the
+                Commercial Bank of Ethiopia and has led numerous financial
+                technology initiatives.
+              </p>
+              <div class="flex flex-wrap">
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Corporate Finance</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >FinTech</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Banking Regulations</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="board-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 relative"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="images/download (2).jpg"
+                alt="Mr. Dawit Mekonnen"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Mr. Dawit Mekonnen
+              </h3>
+              <p class="text-primary font-medium mb-3">Technology Director</p>
+              <p class="text-gray-700 mb-4">
+                Technology innovator with expertise in digital verification
+                systems and secure government platforms for the Ethiopian
+                market.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-linkedin-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-twitter-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-mail-fill"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="board-overlay absolute inset-0 bg-primary bg-opacity-90 p-6 flex flex-col justify-center opacity-0 transition-opacity duration-300"
+            >
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Mr. Dawit Mekonnen
+              </h3>
+              <p class="text-white font-medium mb-4">Technology Director</p>
+              <p class="text-white mb-4">
+                Mr. Mekonnen holds an MSc in Computer Science from MIT and has
+                pioneered several government technology initiatives in Ethiopia.
+                He specializes in blockchain verification systems and secure
+                digital identity solutions.
+              </p>
+              <div class="flex flex-wrap">
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Blockchain</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Digital Identity</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Cybersecurity</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="board-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 relative"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="images/download.jpg"
+                alt="Dr. Hiwot Tadesse"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Dr. Hiwot Tadesse
+              </h3>
+              <p class="text-primary font-medium mb-3">
+                Legal Affairs Director
+              </p>
+              <p class="text-gray-700 mb-4">
+                Specialized in Ethiopian tax law and international tax treaties
+                with extensive experience in legal compliance for multinational
+                corporations.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-linkedin-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-twitter-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-mail-fill"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="board-overlay absolute inset-0 bg-primary bg-opacity-90 p-6 flex flex-col justify-center opacity-0 transition-opacity duration-300"
+            >
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Dr. Hiwot Tadesse
+              </h3>
+              <p class="text-white font-medium mb-4">Legal Affairs Director</p>
+              <p class="text-white mb-4">
+                Dr. Tadesse holds a PhD in International Tax Law from Oxford
+                University and has served as legal counsel for the Ethiopian
+                Ministry of Finance. She has authored several publications on
+                Ethiopian tax reform.
+              </p>
+              <div class="flex flex-wrap">
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Tax Law</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >International Treaties</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Legal Compliance</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="board-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 relative"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="images/download (1).jpg"
+                alt="Mr. Solomon Girma"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Mr. Solomon Girma
+              </h3>
+              <p class="text-primary font-medium mb-3">
+                Public Relations Director
+              </p>
+              <p class="text-gray-700 mb-4">
+                Communications expert with deep understanding of Ethiopian
+                business culture and government relations, specializing in
+                public-private partnerships.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-linkedin-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-twitter-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-mail-fill"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="board-overlay absolute inset-0 bg-primary bg-opacity-90 p-6 flex flex-col justify-center opacity-0 transition-opacity duration-300"
+            >
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Mr. Solomon Girma
+              </h3>
+              <p class="text-white font-medium mb-4">
+                Public Relations Director
+              </p>
+              <p class="text-white mb-4">
+                Mr. Girma has over 30 years of experience in government
+                relations and was previously the Director of Communications for
+                the Ethiopian Chamber of Commerce. He specializes in
+                facilitating business-government dialogue.
+              </p>
+              <div class="flex flex-wrap">
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Government Relations</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Public Affairs</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Strategic Communications</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="board-card bg-white rounded shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 relative"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="images/download.jpg"
+                alt="Ms. Bethlehem Alemu"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-1">
+                Ms. Bethlehem Alemu
+              </h3>
+              <p class="text-primary font-medium mb-3">
+                SME Relations Director
+              </p>
+              <p class="text-gray-700 mb-4">
+                Entrepreneur and small business advocate with expertise in
+                helping Ethiopian SMEs navigate tax regulations and achieve
+                compliance.
+              </p>
+              <div class="flex space-x-3">
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-linkedin-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-twitter-fill"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                >
+                  <i class="ri-mail-fill"></i>
+                </a>
+              </div>
+            </div>
+            <div
+              class="board-overlay absolute inset-0 bg-primary bg-opacity-90 p-6 flex flex-col justify-center opacity-0 transition-opacity duration-300"
+            >
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Ms. Bethlehem Alemu
+              </h3>
+              <p class="text-white font-medium mb-4">SME Relations Director</p>
+              <p class="text-white mb-4">
+                Ms. Alemu is the founder of three successful Ethiopian
+                businesses and has received international recognition for her
+                entrepreneurship. She advises the government on SME-friendly tax
+                policies and simplification initiatives.
+              </p>
+              <div class="flex flex-wrap">
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Entrepreneurship</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >SME Development</span
+                >
+                <span
+                  class="bg-white text-primary text-sm font-medium px-3 py-1 rounded-full mr-2 mb-2"
+                  >Business Incubation</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 relative inline-block"
+          >
+            Contact Us
+            <div
+              class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"
+            ></div>
+          </h2>
+          <p class="text-lg text-gray-700 mt-6 max-w-2xl mx-auto">
+            Have questions about our tax verification services? Our team is
+            ready to assist you with any inquiries.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="bg-white rounded shadow-md p-8 border border-gray-100">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-6">
+              Send Us a Message
+            </h3>
+            <form id="contact-form">
+              <div class="mb-6">
+                <label for="name" class="block text-gray-700 font-medium mb-2"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary"
+                  placeholder="Your full name"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="email" class="block text-gray-700 font-medium mb-2"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary"
+                  placeholder="Your email address"
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  for="subject"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Subject</label
+                >
+                <input
+                  type="text"
+                  id="subject"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary"
+                  placeholder="What is this regarding?"
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  for="message"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="5"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary"
+                  placeholder="Your message"
+                ></textarea>
+              </div>
+              <div class="mb-6">
+                <label class="custom-checkbox">
+                  <input type="checkbox" />
+                  <span class="checkmark"></span>
+                  <span class="ml-2"
+                    >I agree to the privacy policy and terms of service</span
+                  >
+                </label>
+              </div>
+              <button
+                type="submit"
+                class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors w-full whitespace-nowrap"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+          <div
+            class="bg-white rounded shadow-md border border-gray-100 overflow-hidden"
+          >
+            <div class="h-64 relative">
+              <div id="map" class="w-full h-full">
+                <img
+                  src="https://public.readdy.ai/gen_page/map_placeholder_1280x720.png"
+                  alt="Office Location Map"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute top-4 left-4 bg-white p-3 rounded shadow-md"
+                >
+                  <i class="ri-map-pin-fill text-primary ri-lg mr-2"></i>
+                  <span class="font-medium">Our Office</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-semibold text-gray-900 mb-6">
+                Get in Touch
+              </h3>
+              <div class="space-y-6">
+                <div class="flex items-start">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4"
+                  >
+                    <i class="ri-map-pin-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900 mb-1">
+                      Office Address
+                    </h4>
+                    <p class="text-gray-700">
+                      Bole Road, Friendship Building, 5th Floor<br />Addis
+                      Ababa, Ethiopia
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4"
+                  >
+                    <i class="ri-phone-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900 mb-1">
+                      Phone Numbers
+                    </h4>
+                    <p class="text-gray-700">
+                      Main: +251 116 612345<br />Support: +251 116 612346
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4"
+                  >
+                    <i class="ri-mail-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900 mb-1">
+                      Email Addresses
+                    </h4>
+                    <p class="text-gray-700">
+                      General: info@ethiotaxverify.com<br />Support:
+                      support@ethiotaxverify.com
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 text-primary mr-4"
+                  >
+                    <i class="ri-time-line ri-lg"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-900 mb-1">
+                      Working Hours
+                    </h4>
+                    <p class="text-gray-700">
+                      Monday - Friday: 8:30 AM - 5:30 PM<br />Saturday: 9:00 AM
+                      - 1:00 PM
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8">
+                <h4 class="font-medium text-gray-900 mb-3">Connect With Us</h4>
+                <div class="flex space-x-4">
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-facebook-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-twitter-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-linkedin-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-instagram-fill"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                  >
+                    <i class="ri-telegram-fill"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="mt-8 flex space-x-4">
+                <a
+                  href="https://wa.me/251116612345"
+                  class="flex items-center justify-center bg-[#25D366] text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors"
+                >
+                  <i class="ri-whatsapp-fill mr-2"></i>
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href="https://t.me/ethiotaxverify"
+                  class="flex items-center justify-center bg-[#0088cc] text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors"
+                >
+                  <i class="ri-telegram-fill mr-2"></i>
+                  <span>Telegram</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="faq" class="py-16 md:py-24">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 relative inline-block"
+          >
+            Frequently Asked Questions
+            <div
+              class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary"
+            ></div>
+          </h2>
+          <p class="text-lg text-gray-700 mt-6 max-w-2xl mx-auto">
+            Find answers to common questions about our Ethiopian tax
+            verification services.
+          </p>
+        </div>
+        <div class="max-w-3xl mx-auto">
+          <div class="space-y-4">
+            <div class="border border-gray-200 rounded overflow-hidden">
+              <div
+                class="accordion-header bg-white px-6 py-4 cursor-pointer flex justify-between items-center"
+              >
+                <h3 class="text-lg font-medium text-gray-900">
+                  What is the Ethiopian Tax Verification System?
+                </h3>
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary accordion-icon"
+                >
+                  <i class="ri-add-line"></i>
+                </div>
+              </div>
+              <div class="accordion-content bg-gray-50 px-6 py-0">
+                <div class="py-4">
+                  <p class="text-gray-700">
+                    The Ethiopian Tax Verification System is a comprehensive
+                    platform that allows businesses and individuals to verify
+                    the authenticity of tax documents, assess tax liabilities,
+                    monitor compliance with Ethiopian tax regulations, and
+                    access various tax-related services. It serves as a bridge
+                    between taxpayers and Ethiopian tax authorities.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="border border-gray-200 rounded overflow-hidden">
+              <div
+                class="accordion-header bg-white px-6 py-4 cursor-pointer flex justify-between items-center"
+              >
+                <h3 class="text-lg font-medium text-gray-900">
+                  How can I verify my tax documents?
+                </h3>
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary accordion-icon"
+                >
+                  <i class="ri-add-line"></i>
+                </div>
+              </div>
+              <div class="accordion-content bg-gray-50 px-6 py-0">
+                <div class="py-4">
+                  <p class="text-gray-700">
+                    You can verify your tax documents by uploading them through
+                    our secure portal or by entering the document reference
+                    number. Our system will check the document against the
+                    Ethiopian Revenue and Customs Authority database and provide
+                    immediate verification results. For businesses, we also
+                    offer batch verification for multiple documents.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="border border-gray-200 rounded overflow-hidden">
+              <div
+                class="accordion-header bg-white px-6 py-4 cursor-pointer flex justify-between items-center"
+              >
+                <h3 class="text-lg font-medium text-gray-900">
+                  What types of tax documents can be verified?
+                </h3>
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary accordion-icon"
+                >
+                  <i class="ri-add-line"></i>
+                </div>
+              </div>
+              <div class="accordion-content bg-gray-50 px-6 py-0">
+                <div class="py-4">
+                  <p class="text-gray-700">
+                    Our system can verify various Ethiopian tax documents
+                    including but not limited to:
+                  </p>
+                  <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-700">
+                    <li>Tax Identification Number (TIN) certificates</li>
+                    <li>Value Added Tax (VAT) registration certificates</li>
+                    <li>Tax clearance certificates</li>
+                    <li>Annual tax payment receipts</li>
+                    <li>Business income tax declarations</li>
+                    <li>Customs duty payment receipts</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="border border-gray-200 rounded overflow-hidden">
+              <div
+                class="accordion-header bg-white px-6 py-4 cursor-pointer flex justify-between items-center"
+              >
+                <h3 class="text-lg font-medium text-gray-900">
+                  Is the verification system secure?
+                </h3>
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary accordion-icon"
+                >
+                  <i class="ri-add-line"></i>
+                </div>
+              </div>
+              <div class="accordion-content bg-gray-50 px-6 py-0">
+                <div class="py-4">
+                  <p class="text-gray-700">
+                    Yes, our verification system employs enterprise-grade
+                    security measures including end-to-end encryption, secure
+                    socket layer (SSL) protection, and multi-factor
+                    authentication. We comply with international data protection
+                    standards and Ethiopian data privacy regulations. All
+                    document uploads and verifications are conducted through
+                    secure channels to protect sensitive financial information.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="border border-gray-200 rounded overflow-hidden">
+              <div
+                class="accordion-header bg-white px-6 py-4 cursor-pointer flex justify-between items-center"
+              >
+                <h3 class="text-lg font-medium text-gray-900">
+                  How can businesses benefit from your tax compliance
+                  monitoring?
+                </h3>
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary accordion-icon"
+                >
+                  <i class="ri-add-line"></i>
+                </div>
+              </div>
+              <div class="accordion-content bg-gray-50 px-6 py-0">
+                <div class="py-4">
+                  <p class="text-gray-700">
+                    Our tax compliance monitoring service helps businesses by:
+                  </p>
+                  <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-700">
+                    <li>
+                      Providing real-time alerts for upcoming tax filing
+                      deadlines
+                    </li>
+                    <li>
+                      Notifying about changes in Ethiopian tax regulations that
+                      affect your business
+                    </li>
+                    <li>
+                      Tracking the status of your tax filings and payments
+                    </li>
+                    <li>
+                      Generating compliance reports for management and auditors
+                    </li>
+                    <li>
+                      Identifying potential compliance issues before they become
+                      problems
+                    </li>
+                  </ul>
+                  <p class="mt-2 text-gray-700">
+                    This proactive approach helps businesses avoid penalties,
+                    maintain good standing with tax authorities, and plan their
+                    tax obligations effectively.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="border border-gray-200 rounded overflow-hidden">
+              <div
+                class="accordion-header bg-white px-6 py-4 cursor-pointer flex justify-between items-center"
+              >
+                <h3 class="text-lg font-medium text-gray-900">
+                  Do you offer services in languages other than English?
+                </h3>
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary accordion-icon"
+                >
+                  <i class="ri-add-line"></i>
+                </div>
+              </div>
+              <div class="accordion-content bg-gray-50 px-6 py-0">
+                <div class="py-4">
+                  <p class="text-gray-700">
+                    Yes, our services are available in both English and Amharic
+                    to accommodate the language preferences of our clients. All
+                    documentation, reports, and communications can be provided
+                    in either language. Our customer support team is fluent in
+                    both languages to ensure clear and effective assistance.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-12 text-center">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Still Have Questions?
+            </h3>
+            <p class="text-gray-700 mb-6">
+              Our team is ready to assist you with any additional questions or
+              concerns.
+            </p>
+            <a
+              href="#contact"
+              class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors inline-block whitespace-nowrap"
+              >Contact Our Support Team</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div>
+            <h3 class="text-2xl font-['Pacifico'] text-white mb-6">logo</h3>
+            <p class="text-gray-400 mb-6">
+              Ethiopia's premier tax verification and compliance solution,
+              bridging traditional values with modern technology to simplify tax
+              management.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors"
+              >
+                <i class="ri-twitter-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors"
+              >
+                <i class="ri-linkedin-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors"
+              >
+                <i class="ri-instagram-fill"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#home"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#board"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Board Members</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#faq"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >FAQ</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Terms & Conditions</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-6">Our Services</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Tax Document Verification</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Tax Liability Assessment</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Compliance Monitoring</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Government Liaison Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Tax Education & Training</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Business Tax Planning</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-6">
+              Subscribe to Our Newsletter
+            </h4>
+            <p class="text-gray-400 mb-4">
+              Stay updated with the latest tax regulations and verification
+              system features.
+            </p>
+            <form class="mb-4">
+              <div class="flex">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  class="px-4 py-2 w-full rounded-l border-none focus:outline-none text-gray-900"
+                />
+                <button
+                  type="submit"
+                  class="bg-primary text-white px-4 py-2 rounded-r hover:bg-opacity-90 transition-colors whitespace-nowrap"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </form>
+            <p class="text-gray-400 text-sm">
+              By subscribing, you agree to our privacy policy and consent to
+              receive updates from our company.
+            </p>
+          </div>
+        </div>
+        <div
+          class="pt-8 border-t border-gray-800 text-center md:flex md:justify-between md:items-center"
+        >
+          <p class="text-gray-400 mb-4 md:mb-0">
+            &copy; 2025 Ethiopian Tax Verification System. All rights reserved.
+          </p>
+          <div class="flex justify-center space-x-6">
+            <div class="flex items-center text-gray-400">
+              <i class="ri-visa-fill text-2xl mr-2"></i>
+              <i class="ri-mastercard-fill text-2xl mr-2"></i>
+              <i class="ri-paypal-fill text-2xl mr-2"></i>
+              <i class="ri-bank-card-fill text-2xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        class="w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center hover:bg-opacity-90 transition-colors group"
+      >
+        <i class="ri-customer-service-2-fill text-white ri-xl"></i>
+        <span
+          class="absolute right-16 bg-white text-gray-900 px-4 py-2 rounded shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap"
+          >Need Help?</span
+        >
+      </button>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+        mobileMenuButton.addEventListener("click", function () {
+          if (mobileMenu.classList.contains("hidden")) {
+            mobileMenu.classList.remove("hidden");
+          } else {
+            mobileMenu.classList.add("hidden");
+          }
+        });
+        mobileMenuLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.add("hidden");
+          });
+        });
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          });
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const accordionHeaders = document.querySelectorAll(".accordion-header");
+        accordionHeaders.forEach((header) => {
+          header.addEventListener("click", function () {
+            const content = this.nextElementSibling;
+            const icon = this.querySelector(".accordion-icon i");
+            if (content.classList.contains("active")) {
+              content.classList.remove("active");
+              icon.classList.remove("ri-subtract-line");
+              icon.classList.add("ri-add-line");
+            } else {
+              content.classList.add("active");
+              icon.classList.remove("ri-add-line");
+              icon.classList.add("ri-subtract-line");
+            }
+          });
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contact-form");
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            submitButton.innerHTML =
+              '<i class="ri-loader-4-line ri-spin"></i> Sending...';
+            submitButton.disabled = true;
+            setTimeout(() => {
+              contactForm.reset();
+              submitButton.innerHTML = '<i class="ri-check-line"></i> Message Sent!';
+              setTimeout(() => {
+                submitButton.innerHTML = "Send Message";
+                submitButton.disabled = false;
+              }, 3000);
+            }, 2000);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
